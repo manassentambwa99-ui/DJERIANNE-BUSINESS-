@@ -14,7 +14,6 @@
   
   <!-- PWA Manifest & Theme -->
   <link rel="manifest" href="./manifest.json">
-  <!-- Couleur du thème basée sur le violet profond du logo -->
   <meta name="theme-color" content="#12061A">
 
   <script>
@@ -33,12 +32,11 @@
 
   <style>
     :root {
-      /* Palette de couleurs basée sur le logo */
-      --color-gold: #E5C158; /* Or luxueux du contour et du 'J' */
-      --color-pink: #EC4899; /* Magenta vibrant du 'D' */
-      --color-purple: #1A0A26; /* Violet profond et riche du fond du logo */
-      --color-purple-halo: #24112e; /* Violet plus clair du halo lumineux */
-      --color-bg: #0d0610; /* Noir profond */
+      --color-gold: #E5C158;
+      --color-pink: #EC4899;
+      --color-purple: #1A0A26;
+      --color-purple-halo: #24112e;
+      --color-bg: #0d0610;
     }
 
     body {
@@ -48,7 +46,6 @@
       min-height: 100vh;
     }
 
-    /* Effet de transparence Cristal / Glassmorphism */
     .glass-card {
       background: rgba(26, 10, 38, 0.45);
       backdrop-filter: blur(20px);
@@ -76,14 +73,12 @@
       letter-spacing: 0.05em;
     }
 
-    /* Texte dynamique avec dégradé basé sur l'or et le magenta */
     .text-dynamic-accent {
       background: linear-gradient(135deg, #FFF 0%, var(--color-gold) 40%, var(--color-pink) 70%, #E5C158 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    /* Boutons basés sur l'or luxueux */
     .btn-gold {
       background-color: var(--color-gold);
       color: #0d0610;
@@ -94,7 +89,6 @@
       box-shadow: 0 0 20px var(--color-gold);
     }
 
-    /* Badges basés sur le magenta du 'D' */
     .bg-badge-pink {
       background-color: var(--color-pink);
     }
@@ -134,11 +128,9 @@
   <header class="sticky top-0 z-40 glass-nav transition-all">
     <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
       <a href="#" class="flex items-center space-x-3 group">
-        <!-- Logo DG Stylisé basé sur le Monogramme -->
-        <div class="relative w-11 h-11 rounded-full bg-gradient-to-br from-[#E5C158] via-[#EC4899] to-[#E5C158] p-0.5 shadow-lg flex items-center justify-center">
-          <div class="w-full h-full bg-[#0d0610] rounded-full flex items-center justify-center">
-            <span class="brand-title font-black text-sm tracking-tighter text-dynamic-accent">DG</span>
-          </div>
+        <!-- Logo JPG -->
+        <div class="relative p-0.5 rounded-lg bg-gradient-to-r from-amber-500 to-pink-500 group-hover:from-gold group-hover:to-pink-400 transition duration-300">
+          <img src="./Logo.jpg" onerror="this.src='https://via.placeholder.com/150/0d0610/E5C158?text=DG'" alt="Logo Djerianne Business" class="h-10 w-10 object-contain rounded-md bg-black">
         </div>
         <div>
           <h1 class="brand-title font-black text-lg tracking-wider uppercase leading-none text-white group-hover:text-gold transition">DJERIANNE</h1>
@@ -147,7 +139,6 @@
       </a>
 
       <div class="flex items-center space-x-2.5">
-        <!-- Espace Créateur discret en haut -->
         <button onclick="promptCreatorAccess()" title="Espace Créateur" class="p-2.5 rounded-full bg-neutral-900/80 hover:bg-neutral-800 text-neutral-400 hover:text-gold transition border border-neutral-800 font-mono text-xs shadow">
           @
         </button>
@@ -183,7 +174,7 @@
     </button>
   </div>
 
-  <!-- Hero Section Chaleureux avec Effet de Transparence -->
+  <!-- Hero Section -->
   <section class="relative overflow-hidden pt-8 pb-6 px-4">
     <div class="max-w-6xl mx-auto">
       <div class="glass-card rounded-3xl p-6 md:p-10 relative overflow-hidden border border-white/10">
@@ -384,9 +375,8 @@
         </button>
       </div>
 
-      <!-- Bouton pour choisir une photo depuis la galerie du téléphone -->
       <div class="p-4 bg-neutral-900/80 border-b border-neutral-800 flex flex-col sm:flex-row items-center justify-between gap-3">
-        <span class="text-xs text-neutral-300 font-semibold">Ajouter une marchandise (depuis la galerie) :</span>
+        <span class="text-xs text-neutral-300 font-semibold">Ajouter une marchandise (.jpg depuis la galerie) :</span>
         <input type="file" id="galleryFileInput" accept="image/*" onchange="handleGalleryUpload(event)" class="text-xs text-neutral-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold btn-gold file:text-[#0d0610] cursor-pointer">
       </div>
 
@@ -406,7 +396,6 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-    // Configuration Firebase sécurisée
     const p1 = "AIzaSyBcoR5";
     const p2 = "yMTMY_ittDm3T9Oak";
     const p3 = "jMOP1CAV-0s";
@@ -427,11 +416,12 @@
     const PHONE_NUMBER = "243846464895";
     const INITIAL_PRODUCTS = 10;
 
+    // Utilisation des extensions .jpg pour les marchandises de base (1.jpg, 2.jpg, etc.)
     let products = Array.from({ length: INITIAL_PRODUCTS }, (_, i) => ({
       id: i + 1,
       name: `Pièce Exclusive DG #${i + 1}`,
       price: 0,
-      image: `./${i + 1}.png`,
+      image: `./${i + 1}.jpg`,
       likes: 0,
       dislikes: 0,
       userVoted: null,
@@ -460,15 +450,15 @@
         try {
           navigator.serviceWorker.ready.then(registration => {
             registration.showNotification("DJERIANNE BUSINESS (DG)", {
-              body: `✨ Nouvel article disponible : ${productName} ! Venez découvrir.`,
-              icon: "./logo.png",
-              badge: "./logo.png",
+              body: `✨ Nouvel article disponible : ${productName} !`,
+              icon: "./Logo.jpg",
+              badge: "./Logo.jpg",
               vibrate: [200, 100, 200]
             });
           }).catch(() => {
             new Notification("DJERIANNE BUSINESS (DG)", {
               body: `✨ Nouvel article disponible : ${productName} !`,
-              icon: "./logo.png"
+              icon: "./Logo.jpg"
             });
           });
         } catch (e) {
@@ -479,7 +469,7 @@
 
     async function loadProductsFromCloud() {
       try {
-        const docRef = doc(db, "shop", "djerianne_catalog_v1");
+        const docRef = doc(db, "shop", "djerianne_catalog_jpg_v1");
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
           products = docSnap.data().items;
@@ -488,7 +478,7 @@
         }
       } catch (e) {
         console.log("Erreur cloud, chargement local:", e);
-        const local = localStorage.getItem('dg_products_data');
+        const local = localStorage.getItem('dg_jpg_products_data');
         if (local) products = JSON.parse(local);
       }
     }
@@ -504,10 +494,10 @@
           }
         });
 
-        const docRef = doc(db, "shop", "djerianne_catalog_v1");
+        const docRef = doc(db, "shop", "djerianne_catalog_jpg_v1");
         await setDoc(docRef, { items: products });
 
-        localStorage.setItem('dg_products_data', JSON.stringify(products));
+        localStorage.setItem('dg_jpg_products_data', JSON.stringify(products));
         renderProducts();
         closeCreatorModal();
         alert("Modifications enregistrées et publiées pour tous les téléphones !");
